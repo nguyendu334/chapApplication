@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { postLoginUser } from '../../../utils/api';
 import { SocketContext } from '../../../utils/context/SocketContext';
 import {
@@ -29,10 +30,12 @@ export const LoginForm = () => {
       console.log('Success');
       socket.connect();
       console.log(socket.connected);
+      toast('Success', { type: 'success', icon: true });
       navigate('/conversations');
     } catch (err) {
       console.log(socket.connected);
       console.log(err);
+      toast('Login failed!', { type: 'error', icon: true });
     }
   };
 
